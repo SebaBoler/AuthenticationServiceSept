@@ -4,7 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.14.12",
+    "chalk": "^2.4.1",
+    "dotenv": "^6.0.0",
+    "graphql-yoga": "^1.15.0",
+    "nodemon": "^1.18.3",
     "prisma-binding": "^2.1.1"
+  },
+  "scripts": {
+    "dev:start": "set NODE_ENV=dev && nodemon src/index.js",
+    "start": "node src/index.js"
   }
 }
