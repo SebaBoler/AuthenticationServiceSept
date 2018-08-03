@@ -1,0 +1,7 @@
+mutation {
+  first: createUser(
+    data: { name: "seba3", email: "seba3@test.pl", password: "123" }
+  ) {
+    id
+  }
+}
