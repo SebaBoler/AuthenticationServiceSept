@@ -1,4 +1,5 @@
-endpoint: http://localhost:4466
+endpoint: ${env:PRISMA_ENDPOINT}
+# secret: ${env:PRISMA_SECRET}
 datamodel: datamodel.graphql
 # - database/enums.graphql
 # - database/company.graphql
@@ -6,4 +7,4 @@ seed:
   import: seed.graphql
 hooks:
   post-deploy:
-    - graphql get-schema -p prisma
+    - graphql get-schema -p prisma    - graphql get-schema -p prisma

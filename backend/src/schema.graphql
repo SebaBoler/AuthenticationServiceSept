@@ -1,12 +1,5 @@
 # import * from './generated/prisma.graphql'
 
-type User {
-  id: ID!
-  name: String
-  email: String!
-  password: String
-}
-
 type Query {
   users(
     where: UserWhereInput
@@ -17,9 +10,24 @@ type Query {
     first: Int
     last: Int
   ): [User]!
+  me: User
 }
 
 type Mutation {
   # createUser(data: UserCreateInput!): User!
-  signup(name: String!, email: String!, password: String!): User!
+  # signup(name: String!, email: String!, password: String!): User!
+  signup(name: String!, email: String!, password: String!): AuthPayload!
+  login(name: String, email: String!, password: String!): AuthPayload!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  name: String
+  email: String!
+  # password: String
 }

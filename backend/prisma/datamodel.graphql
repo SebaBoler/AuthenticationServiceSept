@@ -3,5 +3,13 @@ type User {
   name: String!
   email: String! @unique
   password: String!
-  isActive: Boolean! @default(value:false)
+  isActive: Boolean! @default(value: false)
+  Role: Role @default(value: "USER")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum Role {
+  ADMIN
+  USER
 }

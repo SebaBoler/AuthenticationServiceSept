@@ -46,6 +46,13 @@ const resolvers = require("./resolvers");
 //   }
 // };
 
+const prisma = new Prisma({
+  typeDefs: "src/generated/prisma.graphql",
+  endpoint: process.env.PRISMA_ENDPOINT,
+  // secret: process.env.APP_SECRET,
+  debug: true,
+});
+
 const server = new GraphQLServer({
   typeDefs: "src/schema.graphql",
   resolvers,
@@ -56,15 +63,7 @@ const server = new GraphQLServer({
   resolverValidationOptions: {
     requireResolversForResolveType: false
   },
-  context: req => ({
-    ...req,
-    prisma: new Prisma({
-      typeDefs: "src/generated/prisma.graphql",
-      endpoint: process.env.PRISMA_ENDPOINT,
-      // secret: process.env.APP_SECRET
-      debug: true,
-    })
-  })
+  context: req => ({ ...req, prisma }),
 });
 server.start(() => 
   console.log(`Yoga GraphQL server is running on ${chalk.green(process.env.YOGA_ENDPOINT)}`),
