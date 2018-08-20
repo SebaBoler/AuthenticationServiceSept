@@ -11,6 +11,9 @@ function getUserId(ctx) {
   throw new AuthError()
 }
 
+function createToken(userId) {
+  jwt.sign({ userId, expiresIn: "1h" }, process.env.APP_SECRET)
+}
 class AuthError extends Error {
   constructor() {
     super('Srry hacker, you are not invited here')
@@ -19,5 +22,6 @@ class AuthError extends Error {
 
 module.exports = {
   getUserId,
+  createToken,
   AuthError
 }

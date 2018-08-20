@@ -1,5 +1,10 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { createToken, getUserId } = require('../utils')
+
+function createToken1(userId) {
+  jwt.sign({ userId, expiresIn: 60}, process.env.APP_SECRET)
+}
 
 const Mutation = {
   async signup(parent, args, ctx, info) {
@@ -10,7 +15,8 @@ const Mutation = {
     })
 
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      // token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: createToken(user.id),
       user,
     }
   },
@@ -27,9 +33,15 @@ const Mutation = {
     }
 
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+    //  token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: createToken1(user.id),
       user,
     }
+  },
+
+  async refreshToken(parent, { token }, ctx, info) {
+    const userId = getUserId(ctx, token); 
+    return  createToken(userId);
   },
 }
 
