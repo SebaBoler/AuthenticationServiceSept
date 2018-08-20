@@ -1,0 +1,20 @@
+mutation {
+  first: createUser(
+    data: {
+      email: "admin@4ls.pl"
+      password: "$2y$12$mfH4r6m6IqIUq1t4ZxHCbeVUlL0qWpirreEzyHhuk8CZPTCl0NjkC" # "admin"
+      name: "admin"
+    }
+  ) {
+    id
+  }
+  second: createUser(
+    data: {
+      email: "seba@4ls.pl"
+      password: "$2y$12$w4xQgpkVN7TYptCQ4m6mxu4GWoYjLomOck3lpd4LYQCLRHPPCXyyS" # "seba"
+      name: "seba"
+    }
+  ) {
+    id
+  }
+}
