@@ -2,10 +2,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { createToken, getUserId } = require('../utils')
 
-function createToken1(userId) {
-  jwt.sign({ userId, expiresIn: 60}, process.env.APP_SECRET)
-}
-
 const Mutation = {
   async signup(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
@@ -27,20 +23,22 @@ const Mutation = {
       throw new Error(`No such user found for email: ${email}`)
     }
 
+    // console.log(user.id);
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) {
       throw new Error('Invalid password')
     }
 
+
     return {
     //  token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
-      token: createToken1(user.id),
-      user,
+      token: createToken(user.id),
+      user
     }
   },
 
   async refreshToken(parent, { token }, ctx, info) {
-    const userId = getUserId(ctx, token); 
+    const userId = getUserId(token); 
     return  createToken(userId);
   },
 }

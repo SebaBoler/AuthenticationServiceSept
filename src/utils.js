@@ -11,8 +11,9 @@ function getUserId(ctx) {
   throw new AuthError()
 }
 
-function createToken(userId) {
-  jwt.sign({ userId, expiresIn: "1h" }, process.env.APP_SECRET)
+const createToken = (userId) => {
+  const token = jwt.sign({ userId, expiresIn: "15m" }, process.env.APP_SECRET);
+  return token
 }
 class AuthError extends Error {
   constructor() {
@@ -21,7 +22,7 @@ class AuthError extends Error {
 }
 
 module.exports = {
-  getUserId,
+  getUserId, 
   createToken,
   AuthError
 }

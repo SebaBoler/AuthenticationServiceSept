@@ -16,8 +16,18 @@ type AuthPayload {
   user: User!
 }
 
+# type LoginResponse {
+#   payload: AuthPayload
+#   error: Error
+# }
+
 type User {
   id: ID!
   email: String!
   name: String!
 }
+
+# type Error {
+#   field: String!
+#   message: String!
+# }
