@@ -19,9 +19,5 @@
     "graphql-cli": "2.16.5",
     "nodemon": "1.18.3",
     "prisma": "1.14.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/spietrza/graphql-authorization.git"
   }
 }
